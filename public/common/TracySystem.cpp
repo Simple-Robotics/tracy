@@ -36,7 +36,7 @@
 #ifdef __MINGW32__
 #  define __STDC_FORMAT_MACROS
 #endif
-#include <inttypes.h>
+#include <cinttypes>
 #include <stdio.h>
 #include <stdlib.h>
 
