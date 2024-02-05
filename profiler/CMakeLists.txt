@@ -159,7 +159,17 @@ else()
     )
 endif()
 
-include_directories(${INCLUDES})
+pkg_check_modules(DEPS REQUIRED capstone freetype2)
+set(INCLUDES "${INCLUDES};${DEPS_INCLUDE_DIRS}")
+set(LIBS "${LIBS};${DEPS_LIBRARIES}")
+
+pkg_check_modules(DEPSOPT tbb)
+if(DEPSOPT_FOUND)
+    set(INCLUDES "${INCLUDES};${DEPSOPT_INCLUDE_DIRS}")
+    set(LIBS "${LIBS};${DEPSOPT_LIBRARIES}")
+endif()
+
+include_directories(SYSTEM ${INCLUDES})
 link_libraries(${LIBS})
 
 if(SELF_PROFILE)
