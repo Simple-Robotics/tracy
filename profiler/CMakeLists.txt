@@ -193,3 +193,5 @@ endif()
 if(APPLE)
     target_link_libraries(${PROJECT_NAME} PRIVATE ${APPKIT_LIB})
 endif(APPLE)
+
+install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
