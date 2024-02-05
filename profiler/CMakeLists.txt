@@ -166,6 +166,10 @@ if(DEPSOPT_FOUND)
     set(LIBS "${LIBS};${DEPSOPT_LIBRARIES}")
 endif()
 
+if(APPLE)
+    find_library(APPKIT_LIB AppKit REQUIRED)
+endif(APPLE)
+
 include_directories(SYSTEM ${INCLUDES})
 link_libraries(${LIBS})
 
@@ -215,5 +219,9 @@ if(EMSCRIPTEN)
     file(COPY ${CMAKE_CURRENT_LIST_DIR}/wasm/index.html DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
     file(COPY ${CMAKE_CURRENT_LIST_DIR}/wasm/httpd.py DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 endif()
+
+if(APPLE)
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${APPKIT_LIB})
+endif(APPLE)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
